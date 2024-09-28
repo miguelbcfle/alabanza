@@ -79,21 +79,39 @@
     <table border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
       <tr>
         <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc"><table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 10px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; color: #595959;" class="em-font-Mulish-Regular" align="center"><script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
-<script type="text/javascript">
-MRP.insert({
-'url':'https://solid9.streamupsolutions.com/proxy/gnqrzdzo?mp=/;type=mp3',
-'codec':'mp3',
-'volume':100,
-'autoplay':false,
-'buffering':1,
-'title':' ',
-'bgcolor':'#FFFFFF',
-'skin':'e76',
-'width':130,
-'height':70
-});
-</script></div>
+  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; color: #595959;" class="em-font-Mulish-Regular" align="center"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Audio Player</title>
+    <style>
+        .audio-player {
+            display: flex;
+            justify-content: center;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        audio {
+            width: 100%;
+            outline: none;
+            transform: scale(1.5); /* Scale up the audio player */
+        }
+    </style>
+</head>
+<body>
+
+<div class="audio-player">
+    <audio controls>
+        <source src="https://solid9.streamupsolutions.com/proxy/gnqrzdzo?mp=/;type=mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+</body>
+</html>
+</div>
 </td></tr></table></td>
       </tr></table>
   </td>
