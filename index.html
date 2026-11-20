@@ -1,249 +1,581 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Alabanza Stereo</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open Sans:ital,wght@1,700&display=swap" em-class="em-font-OpenSans-BoldItalic"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open Sans:ital,wght@1,400&display=swap" em-class="em-font-OpenSans-RegularItalic"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open Sans:ital,wght@0,700&display=swap" em-class="em-font-OpenSans-Bold"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open Sans:ital,wght@0,400&display=swap" em-class="em-font-OpenSans-Regular"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400&display=swap" em-class="em-font-Mulish-Regular"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400&display=swap" em-class="em-font-Mulish-Regular"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400&display=swap" em-class="em-font-Roboto-Regular"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700&display=swap" em-class="em-font-Montserrat-Bold">
-	<style type="text/css">
-		html {
-			-webkit-text-size-adjust: none;
-			-ms-text-size-adjust: none;
-		}
-	</style>
-	<style em="styles">
-.em-font-Mulish-Regular {
-    font-weight: 400!important;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alabanza Stereo | Worship Stereo</title>
+<meta name="description" content="Radio cristiana en vivo, en español e inglés. Christian radio, live, in Spanish and English.">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+
+<!-- Link previews (WhatsApp, Facebook, iMessage) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alabanzastereo.com/">
+<meta property="og:title" content="Alabanza Stereo | Worship Stereo">
+<meta property="og:description" content="Con amor para el Señor, en armonía versículo y canción. With love to the Lord, in harmony scripture and song.">
+<meta property="og:image" content="https://alabanzastereo.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Icons and home screen -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Alabanza">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap">
+
+<style>
+:root{
+  --ink:#000000;
+  --muted:#5c5c5c;
+  --paper:#ffffff;
+  --blue:#7ed2f0;
+  --green:#93c665;
+  --purple:#c886b5;
+  --yellow:#fcd95e;
+  --red:#ea5f65;
+  --font:"Open Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
-.em-font-OpenSans-Regular {
-    font-family: "Open Sans",sans-serif!important;
-    font-weight: 400!important;
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font);
+  -webkit-font-smoothing:antialiased;
+  display:grid;
+  grid-template-rows:1fr auto;
+  min-height:100%;
 }
-.em-font-Mulish-Regular {
-    font-family: Mulish,sans-serif!important;
+
+main{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:24px 20px 8px;
+  gap:22px;
+  text-align:center;
 }
-.em-font-OpenSans-Bold {
-    font-family: "Open Sans",sans-serif!important;
-    font-weight: 700!important;
+
+/* Logo stage */
+.stage{
+  position:relative;
+  width:min(100%, 560px);
+  aspect-ratio:1400/703;
 }
-.em-font-OpenSans-BoldItalic,.em-font-OpenSans-RegularItalic {
-    font-family: "Open Sans",sans-serif!important;
-    font-style: italic!important;
+.navidad .stage{ width:min(100%, 520px); aspect-ratio:1400/964; }
+.stage{perspective:1400px}
+.card{
+  position:absolute; inset:0;
+  transform-style:preserve-3d;
+  transition:transform 1.5s cubic-bezier(.34,1.4,.5,1);
+  transition-timing-function:linear(0.0, 0.049, 0.167, 0.322, 0.485, 0.64, 0.775, 0.884, 0.967, 1.025, 1.061, 1.079, 1.084, 1.079, 1.069, 1.056, 1.042, 1.029, 1.018, 1.009, 1.002, 0.998, 0.995, 0.993, 0.993, 0.993, 0.994, 0.995, 0.997, 0.998, 0.999, 0.999, 1.0, 1.0, 1.0, 1.001, 1);
 }
-.em-font-OpenSans-RegularItalic {
-    font-weight: 400!important;
+.card img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:contain;
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+  user-select:none; -webkit-user-drag:none;
 }
-.em-font-OpenSans-BoldItalic {
-    font-weight: 700!important;
+.card .back{transform:rotateY(180deg)}
+
+/* Intro: paint splashes land, then the figure rises */
+.card .splash{opacity:0}
+.intro .splash{animation:splash .62s cubic-bezier(.2,1.4,.4,1) forwards}
+.intro .ink{
+  transition:none;
+  opacity:1;
+  clip-path:inset(100% 0 0 0);
+  animation:rise 1s cubic-bezier(.3,.7,.2,1) .85s forwards;
 }
-@media only screen and (max-device-width:640px),only screen and (max-width:640px) {
-    .em-narrow-table {
-        width: 100%!important;
-        max-width: 640px!important;
-        min-width: 320px!important;
-    }
-    .em-mob-border_all-1px_solid_E5E5E5 {
-        border-width: 1px!important;
-        border-style: solid!important;
-        border-color: #e5e5e5!important;
-    }
-    .em-mob-width-100perc {
-        min-width: 100%!important;
-        width: 100%!important;
-        max-width: 100%!important;
-    }
-    .em-mob-wrap {
-        display: block!important;
-    }
-    .em-mob-padding_right-20 {
-        padding-right: 20px!important;
-    }
-    .em-mob-padding_left-20 {
-        padding-left: 20px!important;
-    }
-    .em-show-td-desktop {
-        display: none!important;
-    }
-    .em-mob-wrap.em-mob-wrap-cancel,.em-show-td-mobile,.noresp-em-mob-wrap.em-mob-wrap-cancel {
-        display: table-cell!important;
-    }
-    .em-mob-text_align-center {
-        text-align: center!important;
-    }
-    .em-mob-font_size-16px {
-        font-size: 16px!important;
-    }
-    .em-mob-padding_bottom-0 {
-        padding-bottom: 0!important;
-    }
-    .em-mob-padding_top-0 {
-        padding-top: 0!important;
-    }
-    .em-mob-line_height-18px {
-        line-height: 18px!important;
-    }
-    .em-mob-font_size-12px {
-        font-size: 12px!important;
-    }
-    .em-mob-width-26px {
-        width: 26px!important;
-        max-width: 26px!important;
-        min-width: 26px!important;
-    }
-    .em-show-img-desktop {
-        display: none!important;
-    }
-    .em-mob-padding_bottom-26 {
-        padding-bottom: 26px!important;
-    }
+.splash.done{opacity:0 !important; animation:none}
+@keyframes splash{
+  0%{opacity:0; transform:scale(.35) rotate(-10deg)}
+  100%{opacity:1; transform:scale(1) rotate(0)}
+}
+@keyframes rise{
+  to{clip-path:inset(0 0 0 0)}
+}
+
+.tagline{
+  margin:-6px 0 0;
+  font-style:italic;
+  font-size:15px;
+  line-height:1.5;
+  color:var(--muted);
+  max-width:30em;
+  text-wrap:balance;
+}
+.tagline span{display:block}
+.tagline span:first-child{font-weight:700;color:#3a3a3a}
+.navidad .tagline{display:none}
+.navidad .live{margin-top:4px}
+
+/* Live label */
+.live{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:14px; font-weight:600; letter-spacing:.01em;
+}
+.live .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#b9b9b9;
+  transition:background .3s;
+}
+.live .en{font-weight:400;font-style:italic;color:var(--muted)}
+[data-state="playing"] .live .dot{background:var(--red);animation:pulse 1.6s ease-out infinite}
+[data-state="connecting"] .live .dot,
+[data-state="reconnecting"] .live .dot{background:var(--yellow)}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(234,95,101,.55)}
+  100%{box-shadow:0 0 0 12px rgba(234,95,101,0)}
+}
+
+/* Play button */
+.play{
+  position:relative;
+  width:112px;height:112px;
+  border:1px solid #e4e4e4;border-radius:50%;
+  background:#fff;
+  box-shadow:0 10px 28px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.08);
+  cursor:pointer;
+  padding:0;
+  display:grid; place-items:center;
+  transition:transform .15s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.play:hover{box-shadow:0 14px 34px rgba(0,0,0,.13), 0 3px 8px rgba(0,0,0,.08)}
+.play:active{transform:scale(.96)}
+.play::before{
+  content:"";
+  position:absolute; inset:-7px;
+  border-radius:50%;
+  border:2px solid transparent;
+  opacity:0;
+  transition:opacity .2s;
+}
+[data-state="connecting"] .play::before,
+[data-state="reconnecting"] .play::before{
+  opacity:1;
+  border-top-color:#000;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.play svg{width:38px;height:38px;fill:#000}
+.play .i-play{margin-left:4px}
+.play .i-pause,.play .i-load{display:none}
+[data-state="playing"] .play .i-play{display:none}
+[data-state="playing"] .play .i-pause{display:block}
+[data-state="connecting"] .play .i-play,
+[data-state="reconnecting"] .play .i-play{display:none}
+[data-state="connecting"] .play .i-load,
+[data-state="reconnecting"] .play .i-load{display:block}
+.play:focus-visible{outline:3px solid #000;outline-offset:6px}
+
+.hint{
+  margin:-6px 0 0;
+  text-wrap:balance;
+  min-height:3em;
+  font-size:15px;
+  line-height:1.5;
+}
+.hint span{display:block}
+.hint .en{font-style:italic;color:var(--muted)}
+
+/* Volume and share */
+.controls{
+  display:flex; align-items:center; gap:14px;
+  width:min(100%, 320px);
+}
+.icon-btn{
+  flex:none;
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  height:40px; min-width:40px; padding:0 10px;
+  border:1.5px solid #dcdcdc; border-radius:20px;
+  background:#fff; color:var(--ink);
+  font:600 14px/1 var(--font);
+  cursor:pointer;
+}
+.icon-btn svg{width:20px;height:20px;fill:currentColor}
+.icon-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.volume{flex:1; display:flex; align-items:center; gap:8px}
+.volume[hidden]{display:none}
+.controls.no-volume{justify-content:center}
+
+input[type=range]{
+  -webkit-appearance:none; appearance:none;
+  flex:1; height:28px; background:transparent; margin:0;
+  --fill:100%;
+}
+input[type=range]::-webkit-slider-runnable-track{
+  height:4px;border-radius:2px;
+  background:linear-gradient(90deg,#000 var(--fill),#e2e2e2 var(--fill));
+}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e2e2e2}
+input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:#000}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; width:20px;height:20px;border-radius:50%;
+  background:#fff; border:1px solid #dcdcdc; margin-top:-8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+}
+input[type=range]::-moz-range-thumb{
+  width:18px;height:18px;border-radius:50%;
+  background:#fff; border:1px solid #dcdcdc;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+}
+input[type=range]:focus-visible{outline:3px solid #000;outline-offset:2px;border-radius:4px}
+
+footer{
+  padding:16px 20px 20px;
+  text-align:center;
+  font-size:13px;
+  line-height:1.7;
+  color:var(--muted);
+}
+footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-height:640px){
+  main{gap:14px}
+  .stage{width:min(100%,420px)}
+  .navidad .stage{width:min(100%,340px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .intro .splash,.intro .ink{animation:none;opacity:1;clip-path:none}
+  .card{transition:none}
+  [data-state="playing"] .live .dot{animation:none}
 }
 </style>
-	<!--[if gte mso 9]>
-	<xml>
-		<o:OfficeDocumentSettings>
-		<o:AllowPNG></o:AllowPNG>
-		<o:PixelsPerInch>96</o:PixelsPerInch>
-		</o:OfficeDocumentSettings>
-	</xml>
-	<![endif]-->
 </head>
-<body style="margin: 0px; padding: 0px; background-color: #ffffff;">
-	<span class="preheader" style="visibility: hidden; opacity: 0; color: #ffffff; height: 0px; width: 0px; font-size: 1px; display: none !important;">&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌&nbsp;‌</span>
-	<!--[if !mso]><!-->
-	<div style="font-size:0px;color:transparent;opacity:0;">
-		⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-	</div>
-	<!--<![endif]-->
-	<table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-size: 1px; line-height: normal; background-color: #ffffff;" bgcolor="#FFFFFF">
-		<tr em="group">
-			<td align="center" bgcolor="#FFFFFF" style="background-color: #ffffff; background-repeat: repeat; padding-top: 0px; padding-bottom: 0px; border-width: 10px 0px 20px; border-right-style: solid; border-left-style: solid; border-right-color: #e5e5e5; border-bottom-color: #e5e5e5; border-left-color: #e5e5e5; border-radius: 5px; box-shadow: 0px 0px 0px 0px;" class="em-mob-border_all-1px_solid_E5E5E5">
-				<!--[if (gte mso 9)|(IE)]>
-				<table cellpadding="0" cellspacing="0" border="0" width="640"><tr><td>
-				<![endif]-->
-				<table cellpadding="0" cellspacing="0" width="100%" border="0" style="max-width: 640px; min-width: 640px; width: 640px;" class="em-narrow-table"><tr em="block" class="em-structure">
-                                    <td align="center" style="padding: 30px 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20">
-                                        <table align="center" border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-                                            <tr>
-                                                <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td>
-  <img src="https://miguelb.s3.us-east-2.amazonaws.com/alabanzastereo/asws.gif" width="560" border="0" alt="" style="display: block; width: 100%; max-width: 560px;">
-</td></tr></table>
-                                                </td>
-                                            </tr></table>
-                                    </td>
-</tr><tr em="block" class="em-structure">
-                                    <!--[if !mso]><!--><td align="center" style="padding: 30px 40px; display: none;" class="em-mob-padding_left-20 em-mob-padding_right-20 em-show-td-mobile em-mob-padding_top-0 em-mob-padding_bottom-0">
-                                        <table align="center" border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-                                            <tr>
-                                                <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 10px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; color: #595959;" class="em-font-OpenSans-Bold em-mob-text_align-center em-mob-font_size-16px"><span class="em-font-OpenSans-BoldItalic" style="font-family: Helvetica, Arial, sans-serif;">With love to the Lord, <br>in harmony scripture and song.</span>
-<br><span class="em-font-OpenSans-RegularItalic" style="font-family: Helvetica, Arial, sans-serif;">Con amor para el Señor, <br>en armonía versículo y canción.</span></div>
-</td></tr></table>
-                                                </td>
-                                            </tr></table>
-                                    </td><!--<![endif]-->
-</tr><tr em="block" class="em-structure">
-  <td align="center" style="padding-right: 40px; padding-left: 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20 em-show-td-desktop">
-    <table border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-      <tr>
-        <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc">
-<table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 30px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; line-height: 27px; color: #595959; font-size: 16px;" class="em-font-OpenSans-Bold" align="center"><span class="em-font-OpenSans-BoldItalic" style="font-family: Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">With love to the Lord, in harmony scripture and song.<br></span></span><span class="em-font-OpenSans-RegularItalic" style="font-family: Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">Con amor para el Señor, en armonía versículo y canción.</span></span><br></div>
-</td></tr></table>
-</td>
-      </tr></table>
-  </td>
-</tr><tr em="block" class="em-structure">
-  <td align="center" style="padding: 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20">
-    <table border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-      <tr>
-        <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc"><table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 10px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; color: #595959;" class="em-font-Mulish-Regular" align="center"><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Audio Player</title>
-    <style>
-        .audio-player {
-            display: flex;
-            justify-content: center;
-            max-width: 200px;
-            margin: 20px auto;
-        }
+<body data-state="idle">
 
-        audio {
-            width: 100%;
-            outline: none;
-            transform: scale(1.5); /* Scale up the audio player */
-        }
-    </style>
-</head>
-<body>
+<main>
+  <h1 class="sr-only">Alabanza Stereo y Worship Stereo, radio cristiana en vivo</h1>
 
-<div class="audio-player">
-    <audio controls>
-        <source src="https://solid9.streamupsolutions.com/proxy/gnqrzdzo?mp=/;type=mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-</div>
+  <div class="stage" id="stage" aria-hidden="true"></div>
 
-</body>
-</html>
-</div>
-</td></tr></table>
-</td>
-      </tr></table>
-  </td>
-</tr><tr em="block" class="em-structure">
-  <td align="center" style="padding: 30px 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20">
-    <table border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-      <tr>
-        <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc">
-<table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td height="0" style="padding: 20px 0 0; border-top: 1px solid #EEEEEE;" class="em-mob-padding_top-0">&nbsp;</td></tr></table>
-</td>
-      </tr></table>
-  </td>
-</tr><tr em="block" class="em-structure">
-                                    <td align="center" style="padding-top: 4px; padding-right: 40px; padding-left: 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20">
-                                        <table align="center" border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-                                            <tr>
-                                                <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc">
-                                                    <table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 10px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 18px; line-height: 24px; color: #595959;" class="em-font-OpenSans-Bold">CONTACT US...</div>
-</td></tr></table>
-                                                </td>
-                                            </tr></table>
-                                    </td>
-</tr><tr em="block" class="em-structure">
-  <td align="center" style="padding-right: 40px; padding-bottom: 30px; padding-left: 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20 em-mob-padding_bottom-26">
-    <table border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-      <tr>
-        <td width="30" valign="top" class="em-mob-wrap em-mob-width-100perc"><table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td>
-  <img src="https://cdn.useblocks.io/34131/240929_2133_jpSYq9Y.png" width="33" border="0" alt="" style="width: 100%; max-width: 33px;" class="em-mob-width-26px em-show-img-desktop">
-</td></tr></table></td>
-      <td width="7" class="em-mob-wrap"></td>
-                                                <td width="523" valign="top" class="em-mob-wrap em-mob-width-100perc"><table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 10px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 29px; color: #595959;" class="em-font-OpenSans-Regular em-mob-font_size-12px">info@alabanzastereo.com&nbsp;</div>
-</td></tr></table></td></tr></table>
-  </td>
-</tr><tr em="block" class="em-structure">
-  <td align="center" style="padding: 30px 40px;" class="em-mob-padding_left-20 em-mob-padding_right-20">
-    <table border="0" cellspacing="0" cellpadding="0" class="em-mob-width-100perc">
-      <tr>
-        <td width="560" valign="top" class="em-mob-wrap em-mob-width-100perc">
-<table cellpadding="0" cellspacing="0" border="0" width="100%" em="atom"><tr><td style="padding-bottom: 10px;">
-  <div style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 24px; color: #595959;" class="em-font-OpenSans-Regular" align="center">All rights reserved. Copyright © 2012 - 2024 Worship Stereo - Alabanza Stereo</div>
-</td></tr></table>
-</td>
-      </tr></table>
-  </td>
-</tr></table>
-				<!--[if (gte mso 9)|(IE)]>
-				</td></tr></table>
-				<![endif]-->
-			</td>
-		</tr>
-	</table>
+  <p class="tagline">
+    <span>Con amor para el Señor, en armonía versículo y canción.</span>
+    <span lang="en">With love to the Lord, in harmony scripture and song.</span>
+  </p>
+
+  <div class="live"><span class="dot"></span>En vivo <span class="en" lang="en">Live</span></div>
+
+  <button class="play" id="play" type="button" aria-label="Escuchar / Listen">
+    <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1.2"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>
+      <svg class="i-load" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>
+  </button>
+
+  <p class="hint" id="hint" aria-live="polite"></p>
+
+  <div class="controls" id="controls">
+    <div class="volume" id="volumeWrap">
+      <button class="icon-btn" id="mute" type="button" aria-label="Silenciar / Mute">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path id="muteIcon" d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+      </button>
+      <label class="sr-only" for="volume">Volumen / Volume</label>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+    </div>
+    <button class="icon-btn" id="share" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.1c-.8 0-1.5.3-2 .8l-7.1-4.1c.1-.3.1-.5.1-.8s0-.5-.1-.8L16 7.1c.5.5 1.2.8 2 .8a3 3 0 1 0-3-3c0 .3 0 .5.1.8L8 9.8A3 3 0 1 0 8 14.2l7.1 4.1c-.1.2-.1.5-.1.7a3 3 0 1 0 3-2.9z"/></svg>
+      <span id="shareLabel">Compartir</span>
+    </button>
+  </div>
+</main>
+
+<footer>
+  <a href="mailto:info@alabanzastereo.com">info@alabanzastereo.com</a><br>
+  &copy; 2012&ndash;<span id="year">2026</span> Worship Stereo / Alabanza Stereo
+</footer>
+
+<audio id="audio" preload="none"></audio>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ===== Settings you may want to change ===== */
+  var STREAM_URL = "https://solid9.streamupsolutions.com/proxy/gnqrzdzo?mp=/;type=mp3";
+  var SWITCH_EVERY_MS = 90000;          // 90 seconds between logo flips
+  // Christmas logos show from November 20 through January 6 (Dia de Reyes).
+  // Preview anytime with ?navidad=1  (or force off with ?navidad=0)
+  function isChristmasSeason(d) {
+    var m = d.getMonth() + 1, day = d.getDate();
+    return (m === 11 && day >= 20) || m === 12 || (m === 1 && day <= 6);
+  }
+  /* =========================================== */
+
+  var LOGOS = {
+    normal:  { a: "img/alabanza.webp",          b: "img/worship.webp",
+               alt: ["Alabanza Stereo", "Worship Stereo"], intro: "alabanza",
+               splashes: [["blue",11.5,68.7],["green",27.2,66.0],["purple",57.8,69.4],["yellow",74.0,68.6],["red",89.6,68.9]] },
+    navidad: { a: "img/alabanza-navidad.webp",  b: "img/worship-navidad.webp",
+               alt: ["Alabanza Stereo, Navidad", "Worship Stereo, Christmas"], intro: "alabanza-navidad",
+               splashes: [["blue",11.5,52.3],["green",27.3,50.3],["purple",58.6,53.0],["yellow",74.7,52.3],["red",90.3,52.5]] }
+  };
+
+  var params = new URLSearchParams(location.search);
+  var force = params.get("navidad");
+  var christmas = force === "1" ? true : force === "0" ? false : isChristmasSeason(new Date());
+  var set = christmas ? LOGOS.navidad : LOGOS.normal;
+  if (christmas) document.body.classList.add("navidad");
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ---------- Logo intro and switching ---------- */
+  var stage = document.getElementById("stage");
+  var card = document.createElement("div");
+  card.className = "card";
+  stage.appendChild(card);
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var splashEls = set.splashes.map(function (s, i) {
+    var img = new Image();
+    img.src = "img/" + set.intro + "-" + s[0] + ".webp";
+    img.alt = "";
+    img.className = "splash";
+    img.style.transformOrigin = s[1] + "% " + s[2] + "%";
+    img.style.animationDelay = (i * 0.11) + "s";
+    card.appendChild(img);
+    return img;
+  });
+
+  var imgA = new Image(); imgA.src = set.a; imgA.alt = set.alt[0]; imgA.className = "ink";
+  var imgB = new Image(); imgB.alt = set.alt[1]; imgB.className = "back";
+  card.appendChild(imgA);
+  card.appendChild(imgB);
+
+  var turns = 0;
+  function switchLogo() {
+    if (document.hidden) return;
+    turns++;
+    card.style.transform = "rotateY(" + (turns * 180) + "deg)";
+  }
+  function startCycle(firstDelay) {
+    imgB.src = set.b; // load the second logo only after the first is showing
+    setTimeout(function () {
+      switchLogo();
+      setInterval(switchLogo, SWITCH_EVERY_MS);
+    }, firstDelay);
+  }
+
+  function runIntro() {
+    if (reduceMotion) {
+      splashEls.forEach(function (el) { el.remove(); });
+      imgA.classList.remove("ink");
+      startCycle(SWITCH_EVERY_MS);
+      return;
+    }
+    stage.classList.add("intro");
+    setTimeout(function () {
+      stage.classList.remove("intro");
+      splashEls.forEach(function (el) { el.remove(); });
+      imgA.classList.remove("ink");
+      startCycle(SWITCH_EVERY_MS);
+    }, 2000);
+  }
+
+  // Wait for the intro images so the animation does not play half-loaded
+  var toLoad = splashEls.concat([imgA]);
+  Promise.all(toLoad.map(function (im) {
+    return im.decode ? im.decode().catch(function () {}) : Promise.resolve();
+  })).then(runIntro);
+
+  /* ---------- Player ---------- */
+  var audio = document.getElementById("audio");
+  var playBtn = document.getElementById("play");
+  var hint = document.getElementById("hint");
+
+  var TEXT = {
+    idle:         ["Toca para escuchar", "Tap to listen"],
+    connecting:   ["Conectando...", "Connecting..."],
+    playing:      ["Escuchando en vivo", "Listening live"],
+    reconnecting: ["Se perdi\u00f3 la se\u00f1al. Reconectando...", "Signal lost. Reconnecting..."],
+    failed:       ["La se\u00f1al no responde. Toca para intentar de nuevo.", "The stream is not responding. Tap to try again."]
+  };
+
+  var state = "idle";
+  var wantPlay = false;
+  var retries = 0;
+  var retryTimer = null;
+  var stallTimer = null;
+  var lastTime = 0;
+
+  function setState(s) {
+    state = s;
+    document.body.setAttribute("data-state", s === "failed" ? "idle" : s);
+    var t = TEXT[s];
+    hint.innerHTML = "<span>" + t[0] + "</span><span class='en' lang='en'>" + t[1] + "</span>";
+    playBtn.setAttribute("aria-label", s === "playing" ? "Pausar / Pause" : "Escuchar / Listen");
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.playbackState = s === "playing" ? "playing" : (wantPlay ? "playing" : "paused");
+    }
+  }
+
+  function connect() {
+    clearTimeout(retryTimer);
+    setState(retries > 0 ? "reconnecting" : "connecting");
+    audio.src = STREAM_URL;
+    audio.load();
+    var p = audio.play();
+    if (p && p.catch) {
+      p.catch(function (err) {
+        if (err && err.name === "NotAllowedError") { wantPlay = false; setState("idle"); }
+        else if (err && err.name !== "AbortError") { scheduleRetry(); }
+      });
+    }
+  }
+
+  function scheduleRetry() {
+    if (!wantPlay) return;
+    clearTimeout(retryTimer);
+    if (retries >= 8) { stopAudio(); setState("failed"); return; }
+    var delays = [1000, 2000, 4000, 6000, 10000, 15000, 20000, 30000];
+    var wait = delays[Math.min(retries, delays.length - 1)];
+    retries++;
+    setState("reconnecting");
+    retryTimer = setTimeout(connect, wait);
+  }
+
+  function stopAudio() {
+    clearTimeout(retryTimer);
+    clearInterval(stallTimer);
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load(); // drop the old buffer so the next play is live, not delayed
+  }
+
+  function start() {
+    wantPlay = true;
+    retries = 0;
+    connect();
+  }
+
+  function stop() {
+    wantPlay = false;
+    stopAudio();
+    setState("idle");
+  }
+
+  playBtn.addEventListener("click", function () {
+    if (state === "playing" || state === "connecting" || state === "reconnecting") stop();
+    else start();
+  });
+
+  audio.addEventListener("playing", function () {
+    if (!wantPlay) return;
+    retries = 0;
+    setState("playing");
+    clearInterval(stallTimer);
+    lastTime = audio.currentTime;
+    var still = 0;
+    stallTimer = setInterval(function () {
+      if (!wantPlay) return;
+      if (audio.currentTime === lastTime) { still++; } else { still = 0; lastTime = audio.currentTime; }
+      if (still >= 4) { still = 0; clearInterval(stallTimer); scheduleRetry(); } // about 12s frozen
+    }, 3000);
+  });
+  ["error", "ended"].forEach(function (ev) {
+    audio.addEventListener(ev, function () { if (wantPlay) scheduleRetry(); });
+  });
+  audio.addEventListener("pause", function () {
+    // Paused by the system (headphones unplugged, call, lock screen)
+    if (wantPlay && state === "playing" && !audio.ended) { wantPlay = false; stopAudio(); setState("idle"); }
+  });
+
+  // Come back online after a dropped connection
+  window.addEventListener("online", function () { if (wantPlay) { retries = 0; connect(); } });
+
+  /* ---------- Lock screen controls ---------- */
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: christmas ? "Alabanza Stereo, Navidad" : "Alabanza Stereo",
+      artist: "En vivo / Live",
+      album: "Worship Stereo",
+      artwork: [
+        { src: "icon-192.png", sizes: "192x192", type: "image/png" },
+        { src: "icon-512.png", sizes: "512x512", type: "image/png" }
+      ]
+    });
+    var mh = function (a, fn) { try { navigator.mediaSession.setActionHandler(a, fn); } catch (e) {} };
+    mh("play", start);
+    mh("pause", stop);
+    mh("stop", stop);
+  }
+
+  /* ---------- Volume (hidden where the phone controls it, like iPhone) ---------- */
+  var volume = document.getElementById("volume");
+  var volumeWrap = document.getElementById("volumeWrap");
+  var muteBtn = document.getElementById("mute");
+  var muteIcon = document.getElementById("muteIcon");
+  var ICON_ON = "M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z";
+  var ICON_OFF = "M4 9v6h4l5 4V5L8 9H4zm12.6 3 2.7-2.7-1.1-1.1-2.7 2.7-2.7-2.7-1.1 1.1 2.7 2.7-2.7 2.7 1.1 1.1 2.7-2.7 2.7 2.7 1.1-1.1z";
+
+  var probe = document.createElement("audio");
+  probe.volume = 0.5;
+  var canSetVolume = Math.abs(probe.volume - 0.5) < 0.01;
+
+  if (!canSetVolume) {
+    volumeWrap.hidden = true;
+    document.getElementById("controls").classList.add("no-volume");
+  } else {
+    var saved = null;
+    try { saved = localStorage.getItem("as-volume"); } catch (e) {}
+    if (saved !== null && !isNaN(parseFloat(saved))) volume.value = saved;
+    audio.volume = parseFloat(volume.value);
+    var paintFill = function () {
+      var v = audio.muted ? 0 : parseFloat(volume.value);
+      volume.style.setProperty("--fill", (v * 100) + "%");
+    };
+    paintFill();
+    var updateMuteIcon = function () {
+      var off = audio.muted || audio.volume === 0;
+      muteIcon.setAttribute("d", off ? ICON_OFF : ICON_ON);
+      muteBtn.setAttribute("aria-label", off ? "Activar sonido / Unmute" : "Silenciar / Mute");
+      paintFill();
+    };
+    volume.addEventListener("input", function () {
+      audio.volume = parseFloat(volume.value);
+      audio.muted = false;
+      try { localStorage.setItem("as-volume", volume.value); } catch (e) {}
+      updateMuteIcon();
+    });
+    muteBtn.addEventListener("click", function () { audio.muted = !audio.muted; updateMuteIcon(); });
+    updateMuteIcon();
+  }
+
+  /* ---------- Share ---------- */
+  var shareBtn = document.getElementById("share");
+  var shareLabel = document.getElementById("shareLabel");
+  var shareUrl = "https://alabanzastereo.com/";
+  shareBtn.addEventListener("click", function () {
+    var data = { title: "Alabanza Stereo", text: "Escucha Alabanza Stereo en vivo / Listen live", url: shareUrl };
+    if (navigator.share) {
+      navigator.share(data).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl).then(function () {
+        shareLabel.textContent = "Enlace copiado";
+        setTimeout(function () { shareLabel.textContent = "Compartir"; }, 2200);
+      });
+    }
+  });
+
+  setState("idle");
+})();
+</script>
 </body>
 </html>
