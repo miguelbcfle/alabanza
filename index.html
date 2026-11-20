@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Alabanza Stereo | Worship Stereo</title>
-<meta name="description" content="Radio cristiana en vivo, en español e inglés. Christian radio, live, in Spanish and English.">
+<title>Worship Stereo | Alabanza Stereo</title>
+<meta name="description" content="Christian radio, live, in English and Spanish. Radio cristiana en vivo, en inglés y español.">
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light">
 
 <!-- Link previews (WhatsApp, Facebook, iMessage) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alabanzastereo.com/">
-<meta property="og:title" content="Alabanza Stereo | Worship Stereo">
-<meta property="og:description" content="Con amor para el Señor, en armonía versículo y canción. With love to the Lord, in harmony scripture and song.">
+<meta property="og:title" content="Worship Stereo | Alabanza Stereo">
+<meta property="og:description" content="With love to the Lord, in harmony scripture and song. Con amor para el Señor, en armonía versículo y canción.">
 <meta property="og:image" content="https://alabanzastereo.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,15 +36,20 @@
   --ink:#000000;
   --muted:#5c5c5c;
   --paper:#ffffff;
-  --blue:#7ed2f0;
-  --green:#93c665;
-  --purple:#c886b5;
-  --yellow:#fcd95e;
   --red:#ea5f65;
+  --yellow:#fcd95e;
   --font:"Open Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --flip-ease:cubic-bezier(.34,1.4,.5,1);
+  --sink-ease:cubic-bezier(.34,1.56,.64,1);
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@supports (transition-timing-function: linear(0, 1)){
+  :root{
+    --flip-ease:linear(0.0, 0.049, 0.167, 0.322, 0.485, 0.64, 0.775, 0.884, 0.967, 1.025, 1.061, 1.079, 1.084, 1.079, 1.069, 1.056, 1.042, 1.029, 1.018, 1.009, 1.002, 0.998, 0.995, 0.993, 0.993, 0.993, 0.994, 0.995, 0.997, 0.998, 0.999, 0.999, 1.0, 1.0, 1.0, 1.001, 1);
+    --sink-ease:linear(0.0, 0.064, 0.226, 0.443, 0.673, 0.886, 1.06, 1.183, 1.253, 1.275, 1.258, 1.213, 1.154, 1.09, 1.032, 0.984, 0.95, 0.93, 0.924, 0.929, 0.941, 0.958, 0.975, 0.991, 1.004, 1.014, 1.019, 1.021, 1.02, 1.016, 1.012, 1.007, 1.002, 0.999, 0.996, 0.995, 0.994, 0.995, 0.996, 0.997, 1);
+  }
 }
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%;margin:0}
@@ -64,49 +69,55 @@ main{
   align-items:center;
   justify-content:center;
   padding:24px 20px 8px;
-  gap:22px;
+  gap:20px;
   text-align:center;
 }
 
-/* Logo stage */
+/* Logo stage: a card with Worship on the front and Alabanza on the back */
 .stage{
   position:relative;
   width:min(100%, 560px);
   aspect-ratio:1400/703;
+  perspective:1400px;
+  visibility:hidden;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
-.navidad .stage{ width:min(100%, 520px); aspect-ratio:1400/964; }
-.stage{perspective:1400px}
+.stage.ready{visibility:visible}
+.navidad .stage{ width:min(100%, 520px); aspect-ratio:1400/965; }
 .card{
   position:absolute; inset:0;
   transform-style:preserve-3d;
-  transition:transform 1.5s cubic-bezier(.34,1.4,.5,1);
-  transition-timing-function:linear(0.0, 0.049, 0.167, 0.322, 0.485, 0.64, 0.775, 0.884, 0.967, 1.025, 1.061, 1.079, 1.084, 1.079, 1.069, 1.056, 1.042, 1.029, 1.018, 1.009, 1.002, 0.998, 0.995, 0.993, 0.993, 0.993, 0.994, 0.995, 0.997, 0.998, 0.999, 0.999, 1.0, 1.0, 1.0, 1.001, 1);
+  transition:transform 1.5s var(--flip-ease);
 }
-.card img{
+.face{
+  position:absolute; inset:0;
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+}
+.face.back{transform:rotateY(180deg)}
+.face img{
   position:absolute; inset:0;
   width:100%; height:100%;
   object-fit:contain;
-  -webkit-backface-visibility:hidden; backface-visibility:hidden;
   user-select:none; -webkit-user-drag:none;
+  pointer-events:none;
 }
-.card .back{transform:rotateY(180deg)}
-
-/* Intro: paint splashes land, then the figure rises */
-.card .splash{opacity:0}
-.intro .splash{animation:splash .62s cubic-bezier(.2,1.4,.4,1) forwards}
-.intro .ink{
-  transition:none;
-  opacity:1;
-  clip-path:inset(100% 0 0 0);
-  animation:rise 1s cubic-bezier(.3,.7,.2,1) .85s forwards;
+.face .nat{position:absolute;inset:0;pointer-events:none}
+.face .splash{
+  transition:transform .7s var(--sink-ease);
 }
-.splash.done{opacity:0 !important; animation:none}
-@keyframes splash{
-  0%{opacity:0; transform:scale(.35) rotate(-10deg)}
-  100%{opacity:1; transform:scale(1) rotate(0)}
+.face .splash.sunk{
+  transform:scale(.94) translateY(1%);
+  transition-duration:.55s;
 }
-@keyframes rise{
-  to{clip-path:inset(0 0 0 0)}
+.glow{
+  position:absolute;
+  width:32%; aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(252,217,94,.85) 0%, rgba(252,217,94,.3) 38%, rgba(252,217,94,0) 70%);
+  opacity:0;
+  pointer-events:none;
 }
 
 .tagline{
@@ -121,19 +132,19 @@ main{
 .tagline span{display:block}
 .tagline span:first-child{font-weight:700;color:#3a3a3a}
 .navidad .tagline{display:none}
-.navidad .live{margin-top:4px}
 
 /* Live label */
 .live{
   display:inline-flex; align-items:center; gap:8px;
-  font-size:14px; font-weight:600; letter-spacing:.01em;
+  font-size:14px; font-weight:600;
 }
+.navidad .live{margin-top:4px}
 .live .dot{
   width:10px;height:10px;border-radius:50%;
   background:#b9b9b9;
   transition:background .3s;
 }
-.live .en{font-weight:400;font-style:italic;color:var(--muted)}
+.live .es{font-weight:400;font-style:italic;color:var(--muted)}
 [data-state="playing"] .live .dot{background:var(--red);animation:pulse 1.6s ease-out infinite}
 [data-state="connecting"] .live .dot,
 [data-state="reconnecting"] .live .dot{background:var(--yellow)}
@@ -145,17 +156,17 @@ main{
 /* Play button */
 .play{
   position:relative;
-  width:112px;height:112px;
+  width:92px;height:92px;
   border:1px solid #e4e4e4;border-radius:50%;
   background:#fff;
-  box-shadow:0 10px 28px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.08);
+  box-shadow:0 8px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.08);
   cursor:pointer;
   padding:0;
   display:grid; place-items:center;
   transition:transform .15s ease, box-shadow .2s ease;
   -webkit-tap-highlight-color:transparent;
 }
-.play:hover{box-shadow:0 14px 34px rgba(0,0,0,.13), 0 3px 8px rgba(0,0,0,.08)}
+.play:hover{box-shadow:0 12px 30px rgba(0,0,0,.13), 0 3px 8px rgba(0,0,0,.08)}
 .play:active{transform:scale(.96)}
 .play::before{
   content:"";
@@ -172,8 +183,8 @@ main{
   animation:spin 1s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.play svg{width:38px;height:38px;fill:#000}
-.play .i-play{margin-left:4px}
+.play svg{width:32px;height:32px;fill:#000}
+.play .i-play{margin-left:3px}
 .play .i-pause,.play .i-load{display:none}
 [data-state="playing"] .play .i-play{display:none}
 [data-state="playing"] .play .i-pause{display:block}
@@ -185,56 +196,24 @@ main{
 
 .hint{
   margin:-6px 0 0;
-  text-wrap:balance;
   min-height:3em;
   font-size:15px;
   line-height:1.5;
+  text-wrap:balance;
 }
 .hint span{display:block}
-.hint .en{font-style:italic;color:var(--muted)}
+.hint .es{font-style:italic;color:var(--muted)}
 
-/* Volume and share */
-.controls{
-  display:flex; align-items:center; gap:14px;
-  width:min(100%, 320px);
-}
-.icon-btn{
-  flex:none;
+.share{
   display:inline-flex; align-items:center; justify-content:center; gap:6px;
-  height:40px; min-width:40px; padding:0 10px;
+  height:40px; padding:0 14px;
   border:1.5px solid #dcdcdc; border-radius:20px;
   background:#fff; color:var(--ink);
   font:600 14px/1 var(--font);
   cursor:pointer;
 }
-.icon-btn svg{width:20px;height:20px;fill:currentColor}
-.icon-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-.volume{flex:1; display:flex; align-items:center; gap:8px}
-.volume[hidden]{display:none}
-.controls.no-volume{justify-content:center}
-
-input[type=range]{
-  -webkit-appearance:none; appearance:none;
-  flex:1; height:28px; background:transparent; margin:0;
-  --fill:100%;
-}
-input[type=range]::-webkit-slider-runnable-track{
-  height:4px;border-radius:2px;
-  background:linear-gradient(90deg,#000 var(--fill),#e2e2e2 var(--fill));
-}
-input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:#e2e2e2}
-input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:#000}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none; width:20px;height:20px;border-radius:50%;
-  background:#fff; border:1px solid #dcdcdc; margin-top:-8px;
-  box-shadow:0 2px 6px rgba(0,0,0,.18);
-}
-input[type=range]::-moz-range-thumb{
-  width:18px;height:18px;border-radius:50%;
-  background:#fff; border:1px solid #dcdcdc;
-  box-shadow:0 2px 6px rgba(0,0,0,.18);
-}
-input[type=range]:focus-visible{outline:3px solid #000;outline-offset:2px;border-radius:4px}
+.share svg{width:18px;height:18px;fill:currentColor}
+.share:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 
 footer{
   padding:16px 20px 20px;
@@ -254,8 +233,9 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .intro .splash,.intro .ink{animation:none;opacity:1;clip-path:none}
   .card{transition:none}
+  .face .nat{position:absolute;inset:0;pointer-events:none}
+.face .splash{transition-duration:.2s}
   [data-state="playing"] .live .dot{animation:none}
 }
 </style>
@@ -263,38 +243,29 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
 <body data-state="idle">
 
 <main>
-  <h1 class="sr-only">Alabanza Stereo y Worship Stereo, radio cristiana en vivo</h1>
+  <h1 class="sr-only">Worship Stereo and Alabanza Stereo, live Christian radio</h1>
 
   <div class="stage" id="stage" aria-hidden="true"></div>
 
   <p class="tagline">
-    <span>Con amor para el Señor, en armonía versículo y canción.</span>
-    <span lang="en">With love to the Lord, in harmony scripture and song.</span>
+    <span>With love to the Lord, in harmony scripture and song.</span>
+    <span lang="es">Con amor para el Señor, en armonía versículo y canción.</span>
   </p>
 
-  <div class="live"><span class="dot"></span>En vivo <span class="en" lang="en">Live</span></div>
+  <div class="live"><span class="dot"></span>Live <span class="es" lang="es">En vivo</span></div>
 
-  <button class="play" id="play" type="button" aria-label="Escuchar / Listen">
+  <button class="play" id="play" type="button" aria-label="Listen / Escuchar">
     <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
-      <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1.2"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>
-      <svg class="i-load" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>
+    <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1.2"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>
+    <svg class="i-load" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>
   </button>
 
   <p class="hint" id="hint" aria-live="polite"></p>
 
-  <div class="controls" id="controls">
-    <div class="volume" id="volumeWrap">
-      <button class="icon-btn" id="mute" type="button" aria-label="Silenciar / Mute">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path id="muteIcon" d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
-      </button>
-      <label class="sr-only" for="volume">Volumen / Volume</label>
-      <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
-    </div>
-    <button class="icon-btn" id="share" type="button">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.1c-.8 0-1.5.3-2 .8l-7.1-4.1c.1-.3.1-.5.1-.8s0-.5-.1-.8L16 7.1c.5.5 1.2.8 2 .8a3 3 0 1 0-3-3c0 .3 0 .5.1.8L8 9.8A3 3 0 1 0 8 14.2l7.1 4.1c-.1.2-.1.5-.1.7a3 3 0 1 0 3-2.9z"/></svg>
-      <span id="shareLabel">Compartir</span>
-    </button>
-  </div>
+  <button class="share" id="share" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.1c-.8 0-1.5.3-2 .8l-7.1-4.1c.1-.3.1-.5.1-.8s0-.5-.1-.8L16 7.1c.5.5 1.2.8 2 .8a3 3 0 1 0-3-3c0 .3 0 .5.1.8L8 9.8A3 3 0 1 0 8 14.2l7.1 4.1c-.1.2-.1.5-.1.7a3 3 0 1 0 3-2.9z"/></svg>
+    <span id="shareLabel">Share</span>
+  </button>
 </main>
 
 <footer>
@@ -319,81 +290,184 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
   }
   /* =========================================== */
 
-  var LOGOS = {
-    normal:  { a: "img/alabanza.webp",          b: "img/worship.webp",
-               alt: ["Alabanza Stereo", "Worship Stereo"], intro: "alabanza",
-               splashes: [["blue",11.5,68.7],["green",27.2,66.0],["purple",57.8,69.4],["yellow",74.0,68.6],["red",89.6,68.9]] },
-    navidad: { a: "img/alabanza-navidad.webp",  b: "img/worship-navidad.webp",
-               alt: ["Alabanza Stereo, Navidad", "Worship Stereo, Christmas"], intro: "alabanza-navidad",
-               splashes: [["blue",11.5,52.3],["green",27.3,50.3],["purple",58.6,53.0],["yellow",74.7,52.3],["red",90.3,52.5]] }
-  };
+  var NATIVITY_SCALE = 0.8;             // size of Mary, the manger, and Joseph (1 = original)
+  // In the original artwork the Worship nativity is drawn a little bigger; this evens it out
+  var NATIVITY_SHIFT = { mary: 2.5, manger: 0, joseph: -2.5 };  // % of logo width, toward the manger
+  var NATIVITY_MATCH = { worship: { mary: 0.89, manger: 0.92, joseph: 0.94 }, alabanza: { mary: 1, manger: 1, joseph: 1 } };
+  var NATIVITY_ORIGINS = {"worship":{"mary":[26.0,69.4],"manger":[41.7,69.4],"joseph":[56.6,69.5]},"alabanza":{"mary":[29.2,73.6],"manger":[44.1,73.4],"joseph":[58.0,73.8]}};
+  var META = {"alabanza-regular":{"w":1400,"h":703,"gw":160,"gh":80,"rle":"03qc.24.04b.25.04a.26.028.41.01c.14.0b.13.06.28.024.46.0g.52.0m.11.02.19.08.17.02.2a.01m.33.05.44.04.4a.0c.54.06.55.01.52.07.1e.05.17.02.2e.017.34.07.37.01.4j.0b.56.04.5a.06.1h.01.17.02.2g.015.38.03.37.01.4k.0a.5l.06.1o.03.2h.013.3a.01.38.4m.08.5m.06.1o.03.2i.012.3j.4n.03.41.02.5n.06.1o.03.2j.011.3j.4o.01.44.5n.06.1p.01.2k.010.3l.4r.5o.06.1q.2l.0y.3l.4r.5p.06.1q.2l.0y.3l.4q.5q.06.1q.2m.0x.3k.4q.5s.05.1r.2m.0w.3k.4q.5s.05.1r.2n.0u.3l.4q.5s.05.1r.2n.0u.3l.4p.5s.06.1r.2o.0t.3k.4q.5t.05.1r.2p.0s.3l.4p.5t.05.1s.2o.0s.3k.4q.5t.05.1s.2o.0r.3l.4r.5r.06.1s.2p.0q.3l.4r.5r.06.1t.2n.0r.3l.4r.5s.05.1s.2o.0r.3l.4r.5s.05.1t.2o.0q.3l.4q.02.5r.05.1s.2q.0p.3k.02.4q.5s.05.1t.2p.0p.3l.4r.5s.05.1u.2o.0p.3k.4s.5s.05.1v.2n.0p.3k.4t.5q.06.1v.2o.0o.3l.4s.5r.05.1v.2o.0n.3m.4s.5r.05.1v.2o.0m.3n.4r.5s.05.1u.2p.0m.3n.4r.5s.05.1u.2o.0m.3o.4r.01.5r.05.1t.2p.0m.3o.4r.02.5p.06.1s.2q.0m.3o.4r.02.5q.05.1r.2s.0k.3p.4n.01.42.02.5n.02.51.06.1q.2t.0k.3q.4k.07.5m.0a.1p.2u.0k.3q.4j.08.5l.0b.1q.2t.0l.3p.4j.08.5l.0b.1r.2s.0m.3o.4k.07.5b.02.58.0d.1o.2t.0m.3o.4k.08.59.04.56.0f.1b.01.13.02.16.2u.0m.3n.4k.09.57.06.55.0g.15.0c.15.02.2r.0o.38.04.33.02.36.4j.09.56.07.55.0g.13.0f.13.09.2a.01.29.0q.34.0d.35.4j.0a.55.0a.51.0h.12.0g.12.0b.24.015.33.0f.32.05.4f.0b.55.0s.11.022.32.0h.31.07.4b.0e.54.03o.48.0h.52.03q.46.04b.43.019","origins":{"blue":[10.5,67.9],"green":[26.8,69.6],"purple":[58.1,69.8],"yellow":[72.8,68.6],"red":[89.9,67.4]}},"alabanza-navidad":{"w":1400,"h":919,"gw":160,"gh":105,"rle":"03qc.24.04b.25.04a.26.040.13.06.28.024.46.0g.52.0m.11.03.18.08.17.02.2a.01m.33.05.44.04.4a.0c.53.07.55.02.51.07.1d.07.16.02.2e.017.33.08.37.01.4j.0b.55.05.5a.06.1h.02.16.02.2g.015.37.04.38.4k.0a.57.02.5c.06.1o.03.2h.013.3a.01.38.4m.08.5m.06.1o.03.2i.012.3j.4n.06.5n.06.1o.03.2i.012.3j.4o.01.44.5n.06.1o.02.2k.010.3k.4s.5o.06.1p.01.2l.0z.3k.4r.5p.06.1q.2l.0y.3l.4q.5q.06.1q.2m.0x.3k.4q.5s.05.1r.2m.0w.3k.4q.5s.05.1r.2n.0u.3l.4q.5s.05.1r.2n.0u.3l.4p.5s.06.1r.2o.0t.3k.4q.5s.06.1r.2p.0s.3l.4p.5t.05.1s.2o.0s.3k.4q.5t.05.1s.2o.0r.3l.4r.5r.06.1s.2p.0q.3l.4r.5r.06.1s.2o.0r.3l.4r.5s.05.1s.2o.0r.3l.4r.5s.05.1t.2o.0q.3l.4q.02.5r.05.1t.2p.0p.3k.02.4q.5s.05.1t.2p.0p.3l.4r.5s.05.1u.2n.0q.3k.4s.5s.05.1v.2n.0p.3k.4t.5r.05.1v.2n.0p.3k.4t.5r.05.1v.2o.0n.3m.4s.5r.05.1v.2o.0n.3m.4r.5s.05.1u.2p.0m.3n.4r.5s.05.1u.2o.0m.3o.4r.01.5r.05.1u.2o.0m.3o.4r.02.5q.05.1t.2p.0m.3p.4q.02.5q.05.1s.2q.0l.3p.4r.01.5n.02.52.05.1r.2s.0k.3q.4l.06.5m.0a.1q.2t.0k.3q.4k.07.5l.0b.1q.2s.0m.3p.4j.08.5l.0b.1r.2s.0l.3p.4k.07.5c.01.58.0b.11.01.1o.2t.0m.3o.4k.07.5b.03.57.0e.1f.01.17.2u.0m.3n.4k.08.59.05.55.0g.16.06.11.03.16.01.2t.0n.38.01.32.01.33.01.36.4k.09.57.06.55.0g.13.0e.14.04.22.02.2m.0p.35.0b.36.4j.0a.55.09.52.0h.12.0g.12.0a.28.04.22.01.21.0u.33.0e.34.02.4h.0b.55.0s.11.022.33.0g.32.06.4c.0d.54.02x.31.0q.49.0g.52.03q.47.04a.43.034d","origins":{"blue":[10.5,52.0],"green":[26.8,53.2],"purple":[58.1,53.4],"yellow":[72.8,52.5],"red":[89.9,51.6]}},"worship-regular":{"w":1400,"h":677,"gw":160,"gh":77,"rle":"03hf.23.04c.25.04a.25.04a.27.027.42.01d.14.0a.13.05.29.023.46.0l.51.09.52.09.11.02.19.07.17.01.2d.017.31.0a.33.06.44.04.49.0h.54.06.57.06.1f.03.18.2f.015.34.07.37.02.46.02.4b.0f.56.02.51.01.58.06.1g.01.19.2g.013.38.03.38.01.4l.0d.5j.06.1p.01.2g.012.3k.01.4l.0c.5k.06.1p.2i.010.3k.02.4l.0b.5l.06.1p.2j.0z.3k.02.4m.0a.5l.06.1p.2k.0x.3l.02.4n.08.5m.06.1p.2l.0w.3l.02.4o.06.5n.06.1p.2m.0u.3m.02.4o.05.5o.06.1p.2n.0t.3m.03.4n.04.5p.06.1q.2n.0s.3m.03.4n.04.5p.06.1p.01.2o.0r.3l.04.4n.04.5p.06.1p.01.2o.0q.3m.03.4o.04.5p.06.1p.02.2n.0q.3m.03.4o.04.5p.06.1q.01.2o.0p.3m.03.4o.04.5p.06.1r.01.2n.0p.3m.03.4o.04.5p.06.1r.01.2n.0p.3m.03.4p.03.5p.06.1r.01.2n.0p.3m.03.4q.02.5p.06.1r.01.2o.0n.3n.02.4s.01.5p.06.1r.01.2o.0m.3o.03.4s.01.5o.06.1r.01.2o.0m.3n.03.4t.01.5o.06.1s.2n.0m.3p.02.4u.5o.06.1t.2l.0n.3p.02.4u.5o.06.1t.2l.0n.3p.02.4u.5o.06.1u.2l.0m.3p.02.4u.5o.06.1t.01.2m.0l.3q.4v.5o.06.1t.2n.0l.3q.4v.5o.06.1t.2n.0l.3q.4v.5o.06.1t.2n.0m.3p.4u.01.5o.06.1t.2n.0m.3p.4u.01.5o.06.1s.2o.0l.3r.4n.01.44.03.5n.06.1r.2p.0l.3q.01.4k.0b.5n.06.1p.2r.0l.3p.01.4k.0d.5m.06.1o.2t.0k.3o.01.4k.0d.5m.07.1p.2s.0l.3o.01.4j.0d.5l.08.1p.2s.0l.3p.01.4i.0d.5a.02.58.0a.1o.2s.0m.3o.01.4j.0d.58.04.56.0c.18.04.13.02.16.03.22.02.2l.0n.3f.01.37.01.4j.0e.56.06.55.0d.14.0d.14.09.28.03.26.01.21.0p.36.06.31.03.36.02.4i.0e.55.08.53.0e.13.0f.12.0b.21.016.34.0d.34.04.4h.0e.55.0p.12.020.33.0f.32.07.4d.0g.55.02r.31.0r.49.0k.52.03m.47.04a.44.01a","origins":{"blue":[10.2,68.1],"green":[25.8,68.7],"purple":[56.2,70.0],"yellow":[72.3,69.7],"red":[90.6,67.9]}},"worship-navidad":{"w":1400,"h":965,"gw":160,"gh":110,"rle":"03hf.23.04c.25.04a.25.04a.27.027.42.01d.14.0a.13.05.29.023.46.0l.51.09.52.09.11.02.19.07.17.01.2d.01i.33.07.43.04.49.0h.54.06.57.06.1f.03.18.2f.015.34.07.36.04.45.02.4b.0f.56.04.58.06.1g.01.19.2f.014.38.03.38.01.4l.0d.5j.06.1q.2g.012.3a.01.39.01.4l.0c.5k.06.1p.2i.010.3k.02.4l.0b.5l.06.1p.01.2i.0z.3k.02.4m.0a.5l.06.1p.2k.0x.3l.02.4n.08.5m.06.1p.2l.0w.3l.02.4o.06.5n.06.1p.2m.0u.3m.02.4o.05.5o.06.1p.2n.0t.3m.03.4n.04.5p.06.1q.2n.0s.3m.03.4n.04.5p.06.1p.01.2o.0r.3l.04.4n.04.5p.06.1p.01.2o.0q.3m.03.4o.04.5p.06.1p.02.2n.0q.3m.03.4o.04.5p.06.1q.01.2o.0p.3m.03.4o.04.5p.06.1q.02.2n.0p.3m.03.4o.04.5p.06.1r.01.2n.0p.3m.03.4p.03.5p.06.1r.01.2n.0p.3m.03.4q.02.5p.06.1r.01.2o.0n.3n.02.4s.01.5p.06.1r.01.2o.0m.3o.03.4s.01.5o.06.1r.01.2o.0m.3n.04.4s.01.5o.06.1s.2n.0n.3o.02.4u.5o.06.1s.2m.0n.3p.02.4u.5o.06.1t.2l.0n.3p.02.4u.5o.06.1u.2l.0m.3p.02.4u.5o.06.1u.2m.0l.3q.4v.5o.06.1t.2n.0l.3q.4v.5o.06.1t.2n.0l.3q.4v.5o.06.1t.2n.0m.3p.4v.5o.06.1t.2n.0m.3p.4u.01.5o.06.1s.2o.0m.3q.4s.02.5o.06.1r.2p.0l.3q.01.4k.0b.5n.06.1q.2q.0l.3p.01.4k.0d.5m.06.1o.2t.0k.3o.01.4k.0d.5m.07.1p.2s.0l.3o.4k.0d.5l.08.1p.2s.0l.3p.4j.0d.5a.02.58.0a.1o.2s.0m.3o.01.4j.0d.58.04.56.0c.18.04.13.02.16.03.2p.0n.3n.01.4j.0d.57.06.55.0d.14.0d.15.08.29.02.28.0p.36.06.31.03.36.01.4j.0e.55.08.53.0e.13.0f.12.0b.22.015.34.0d.34.04.4h.0e.55.0p.12.020.33.0f.32.07.4d.0g.55.02r.31.0r.49.0k.53.03l.47.04a.44.043y","origins":{"blue":[10.2,47.7],"green":[25.8,48.2],"purple":[56.2,49.1],"yellow":[72.3,48.9],"red":[90.6,47.6]}}};
+  var COLORS = ["blue", "green", "purple", "yellow", "red"];
+  var POP = "linear(0.0, 0.048, 0.173, 0.345, 0.535, 0.724, 0.892, 1.03, 1.132, 1.198, 1.229, 1.232, 1.212, 1.178, 1.135, 1.09, 1.048, 1.011, 0.982, 0.962, 0.95, 0.946, 0.947, 0.953, 0.962, 0.973, 0.983, 0.992, 1.0, 1.006, 1.01, 1.012, 1.013, 1.012, 1.01, 1.008, 1.005, 1.003, 1.001, 0.999, 1)";
 
   var params = new URLSearchParams(location.search);
   var force = params.get("navidad");
   var christmas = force === "1" ? true : force === "0" ? false : isChristmasSeason(new Date());
-  var set = christmas ? LOGOS.navidad : LOGOS.normal;
+  var mode = christmas ? "navidad" : "regular";
   if (christmas) document.body.classList.add("navidad");
-
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  /* ---------- Logo intro and switching ---------- */
+  var supportsLinear = window.CSS && CSS.supports && CSS.supports("transition-timing-function", "linear(0, 1)");
+  if (!supportsLinear) POP = "cubic-bezier(.34,1.56,.64,1)";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Build the two logo faces from separate layers ---------- */
   var stage = document.getElementById("stage");
   var card = document.createElement("div");
   card.className = "card";
   stage.appendChild(card);
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var splashEls = set.splashes.map(function (s, i) {
-    var img = new Image();
-    img.src = "img/" + set.intro + "-" + s[0] + ".webp";
-    img.alt = "";
-    img.className = "splash";
-    img.style.transformOrigin = s[1] + "% " + s[2] + "%";
-    img.style.animationDelay = (i * 0.11) + "s";
-    card.appendChild(img);
-    return img;
-  });
-
-  var imgA = new Image(); imgA.src = set.a; imgA.alt = set.alt[0]; imgA.className = "ink";
-  var imgB = new Image(); imgB.alt = set.alt[1]; imgB.className = "back";
-  card.appendChild(imgA);
-  card.appendChild(imgB);
-
-  var turns = 0;
-  function switchLogo() {
-    if (document.hidden) return;
-    turns++;
-    card.style.transform = "rotateY(" + (turns * 180) + "deg)";
+  function decodeMap(m) {
+    var out = new Int8Array(m.gw * m.gh), i = 0;
+    m.rle.split(".").forEach(function (run) {
+      var v = +run[0], n = parseInt(run.slice(1), 36);
+      for (var k = 0; k < n; k++) out[i++] = v;
+    });
+    return out;
   }
-  function startCycle(firstDelay) {
-    imgB.src = set.b; // load the second logo only after the first is showing
-    setTimeout(function () {
-      switchLogo();
-      setInterval(switchLogo, SWITCH_EVERY_MS);
-    }, firstDelay);
+
+  function buildFace(brand, cls) {
+    var key = brand + "-" + mode, m = META[key];
+    var face = document.createElement("div");
+    face.className = "face " + cls;
+    var f = { el: face, meta: m, map: decodeMap(m), splashes: [], layers: {} };
+    COLORS.forEach(function (c) {
+      var img = new Image();
+      img.src = "img/" + key + "-splash-" + c + ".webp";
+      img.alt = "";
+      img.className = "splash";
+      img.style.transformOrigin = m.origins[c][0] + "% " + m.origins[c][1] + "%";
+      face.appendChild(img);
+      f.splashes.push(img);
+    });
+    var tops = christmas ? ["ink", "nativity", "message"] : ["ink"];
+    tops.forEach(function (t) {
+      if (t === "nativity") {
+        var g = document.createElement("div");
+        g.className = "glow";
+        g.style.left = brand === "worship" ? "42%" : "43.4%";
+        g.style.top = brand === "worship" ? "57%" : "60%";
+        face.appendChild(g);
+        f.layers.glow = g;
+      }
+      if (t === "nativity") {
+        // Mary, the manger, and Joseph, each shrunk from its own base
+        var group = document.createElement("div");
+        group.className = "nat";
+        ["mary", "manger", "joseph"].forEach(function (n) {
+          var o = NATIVITY_ORIGINS[brand][n];
+          var pi = new Image();
+          pi.src = "img/" + key + "-" + n + ".webp";
+          pi.alt = "";
+          pi.style.transformOrigin = o[0] + "% " + o[1] + "%";
+          pi.style.transform = "translateX(" + NATIVITY_SHIFT[n] + "%) scale(" + (NATIVITY_SCALE * NATIVITY_MATCH[brand][n]) + ")";
+          group.appendChild(pi);
+        });
+        face.appendChild(group);
+        f.layers.nativity = group;
+        return;
+      }
+      var img = new Image();
+      img.src = "img/" + key + "-" + t + ".webp";
+      img.alt = t === "ink" ? (brand === "worship" ? "Worship Stereo" : "Alabanza Stereo") : "";
+      face.appendChild(img);
+      f.layers[t] = img;
+    });
+    card.appendChild(face);
+    return f;
+  }
+
+  var front = buildFace("worship", "front");   // shows first
+  var back = buildFace("alabanza", "back");
+  if (christmas) stage.style.aspectRatio = "1400/965";
+
+  /* ---------- Intro: colors pop in any order, then the name and person, then the nativity ---------- */
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
   }
 
   function runIntro() {
-    if (reduceMotion) {
-      splashEls.forEach(function (el) { el.remove(); });
-      imgA.classList.remove("ink");
-      startCycle(SWITCH_EVERY_MS);
-      return;
+    stage.classList.add("ready");
+    if (reduceMotion) return;
+    var opts = function (delay, dur, ease) { return { delay: delay, duration: dur, easing: ease, fill: "backwards" }; };
+
+    shuffle(front.splashes.slice()).forEach(function (img, i) {
+      img.animate([
+        { opacity: 0, transform: "scale(.5)" },
+        { opacity: 1, transform: "scale(1)" }
+      ], opts(i * 85 + Math.random() * 40, 560, POP));
+    });
+
+    front.layers.ink.style.transformOrigin = "50% 55%";
+    front.layers.ink.animate([
+      { opacity: 0, transform: "scale(.86)" },
+      { opacity: 1, transform: "scale(1)" }
+    ], opts(620, 600, POP));
+
+    if (christmas) {
+      front.layers.glow.animate([
+        { opacity: 0, transform: "translate(-50%,-50%) scale(.5)" },
+        { opacity: 1, transform: "translate(-50%,-50%) scale(1)", offset: .35 },
+        { opacity: 0, transform: "translate(-50%,-50%) scale(1.2)" }
+      ], { delay: 1080, duration: 1200, easing: "ease-out", fill: "both" });
+
+      front.layers.nativity.style.transformOrigin = "45% 75%";
+      front.layers.nativity.animate([
+        { opacity: 0, transform: "translateY(5%) scale(.9)" },
+        { opacity: 1, transform: "translateY(0) scale(1)" }
+      ], opts(1150, 600, POP));
+
+      front.layers.message.animate([
+        { opacity: 0, transform: "translateY(3%)" },
+        { opacity: 1, transform: "translateY(0)" }
+      ], opts(1500, 500, "cubic-bezier(.22,.8,.25,1)"));
     }
-    stage.classList.add("intro");
-    setTimeout(function () {
-      stage.classList.remove("intro");
-      splashEls.forEach(function (el) { el.remove(); });
-      imgA.classList.remove("ink");
-      startCycle(SWITCH_EVERY_MS);
-    }, 2000);
   }
 
-  // Wait for the intro images so the animation does not play half-loaded
-  var toLoad = splashEls.concat([imgA]);
-  Promise.all(toLoad.map(function (im) {
-    return im.decode ? im.decode().catch(function () {}) : Promise.resolve();
+  // Wait for the first logo's layers so the intro never plays half-loaded
+  var firstImgs = Array.prototype.slice.call(front.el.querySelectorAll("img"));
+  Promise.all(firstImgs.map(function (im) {
+    return im.decode ? im.decode().catch(function () {}) : null;
   })).then(runIntro);
+
+  /* ---------- Flip between Worship and Alabanza ---------- */
+  var turns = 0, flipping = false;
+  function flip() {
+    if (document.hidden) return;
+    clearSink();
+    turns++;
+    flipping = true;
+    card.style.transform = "rotateY(" + (turns * 180) + "deg)";
+    setTimeout(function () { flipping = false; }, 1500);
+  }
+  setInterval(flip, SWITCH_EVERY_MS);
+
+  /* ---------- Colors sink a little when touched or hovered ---------- */
+  var sunk = null;
+  function clearSink() { if (sunk) { sunk.classList.remove("sunk"); sunk = null; } }
+  function splashAt(e) {
+    if (flipping) return null;
+    var f = turns % 2 === 0 ? front : back, m = f.meta;
+    var r = stage.getBoundingClientRect();
+    var s = Math.min(r.width / m.w, r.height / m.h);
+    var dw = m.w * s, dh = m.h * s;
+    var x = (e.clientX - r.left - (r.width - dw) / 2) / dw;
+    var y = (e.clientY - r.top - (r.height - dh) / 2) / dh;
+    if (x < 0 || y < 0 || x >= 1 || y >= 1) return null;
+    var v = f.map[Math.floor(y * m.gh) * m.gw + Math.floor(x * m.gw)];
+    return v ? f.splashes[v - 1] : null;
+  }
+  function sinkTo(el) {
+    if (el === sunk) return;
+    clearSink();
+    if (el) { el.classList.add("sunk"); sunk = el; }
+  }
+  stage.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") sinkTo(splashAt(e)); });
+  stage.addEventListener("pointerleave", clearSink);
+  stage.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") sinkTo(splashAt(e)); });
+  ["pointerup", "pointercancel"].forEach(function (ev) {
+    stage.addEventListener(ev, function (e) { if (e.pointerType !== "mouse") setTimeout(clearSink, 120); });
+  });
 
   /* ---------- Player ---------- */
   var audio = document.getElementById("audio");
@@ -401,28 +475,23 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
   var hint = document.getElementById("hint");
 
   var TEXT = {
-    idle:         ["Toca para escuchar", "Tap to listen"],
-    connecting:   ["Conectando...", "Connecting..."],
-    playing:      ["Escuchando en vivo", "Listening live"],
-    reconnecting: ["Se perdi\u00f3 la se\u00f1al. Reconectando...", "Signal lost. Reconnecting..."],
-    failed:       ["La se\u00f1al no responde. Toca para intentar de nuevo.", "The stream is not responding. Tap to try again."]
+    idle:         ["Tap to listen", "Toca para escuchar"],
+    connecting:   ["Connecting...", "Conectando..."],
+    playing:      ["Listening live", "Escuchando en vivo"],
+    reconnecting: ["Signal lost. Reconnecting...", "Se perdi\u00f3 la se\u00f1al. Reconectando..."],
+    failed:       ["The stream is not responding. Tap to try again.", "La se\u00f1al no responde. Toca para intentar de nuevo."]
   };
 
-  var state = "idle";
-  var wantPlay = false;
-  var retries = 0;
-  var retryTimer = null;
-  var stallTimer = null;
-  var lastTime = 0;
+  var state = "idle", wantPlay = false, retries = 0, retryTimer = null, stallTimer = null, lastTime = 0;
 
   function setState(s) {
     state = s;
     document.body.setAttribute("data-state", s === "failed" ? "idle" : s);
     var t = TEXT[s];
-    hint.innerHTML = "<span>" + t[0] + "</span><span class='en' lang='en'>" + t[1] + "</span>";
-    playBtn.setAttribute("aria-label", s === "playing" ? "Pausar / Pause" : "Escuchar / Listen");
+    hint.innerHTML = "<span>" + t[0] + "</span><span class='es' lang='es'>" + t[1] + "</span>";
+    playBtn.setAttribute("aria-label", s === "playing" ? "Pause / Pausar" : "Listen / Escuchar");
     if ("mediaSession" in navigator) {
-      navigator.mediaSession.playbackState = s === "playing" ? "playing" : (wantPlay ? "playing" : "paused");
+      navigator.mediaSession.playbackState = (s === "playing" || wantPlay) ? "playing" : "paused";
     }
   }
 
@@ -443,7 +512,7 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
   function scheduleRetry() {
     if (!wantPlay) return;
     clearTimeout(retryTimer);
-    if (retries >= 8) { stopAudio(); setState("failed"); return; }
+    if (retries >= 8) { stopAudio(); wantPlay = false; setState("failed"); return; }
     var delays = [1000, 2000, 4000, 6000, 10000, 15000, 20000, 30000];
     var wait = delays[Math.min(retries, delays.length - 1)];
     retries++;
@@ -459,17 +528,8 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
     audio.load(); // drop the old buffer so the next play is live, not delayed
   }
 
-  function start() {
-    wantPlay = true;
-    retries = 0;
-    connect();
-  }
-
-  function stop() {
-    wantPlay = false;
-    stopAudio();
-    setState("idle");
-  }
+  function start() { wantPlay = true; retries = 0; connect(); }
+  function stop() { wantPlay = false; stopAudio(); setState("idle"); }
 
   playBtn.addEventListener("click", function () {
     if (state === "playing" || state === "connecting" || state === "reconnecting") stop();
@@ -493,19 +553,16 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
     audio.addEventListener(ev, function () { if (wantPlay) scheduleRetry(); });
   });
   audio.addEventListener("pause", function () {
-    // Paused by the system (headphones unplugged, call, lock screen)
+    // Paused by the system (headphones unplugged, a call, the lock screen)
     if (wantPlay && state === "playing" && !audio.ended) { wantPlay = false; stopAudio(); setState("idle"); }
   });
-
-  // Come back online after a dropped connection
   window.addEventListener("online", function () { if (wantPlay) { retries = 0; connect(); } });
 
   /* ---------- Lock screen controls ---------- */
   if ("mediaSession" in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: christmas ? "Alabanza Stereo, Navidad" : "Alabanza Stereo",
-      artist: "En vivo / Live",
-      album: "Worship Stereo",
+      title: "Worship Stereo / Alabanza Stereo",
+      artist: "Live / En vivo",
       artwork: [
         { src: "icon-192.png", sizes: "192x192", type: "image/png" },
         { src: "icon-512.png", sizes: "512x512", type: "image/png" }
@@ -517,59 +574,18 @@ footer a{color:var(--ink);text-decoration-color:#bbb;text-underline-offset:3px}
     mh("stop", stop);
   }
 
-  /* ---------- Volume (hidden where the phone controls it, like iPhone) ---------- */
-  var volume = document.getElementById("volume");
-  var volumeWrap = document.getElementById("volumeWrap");
-  var muteBtn = document.getElementById("mute");
-  var muteIcon = document.getElementById("muteIcon");
-  var ICON_ON = "M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z";
-  var ICON_OFF = "M4 9v6h4l5 4V5L8 9H4zm12.6 3 2.7-2.7-1.1-1.1-2.7 2.7-2.7-2.7-1.1 1.1 2.7 2.7-2.7 2.7 1.1 1.1 2.7-2.7 2.7 2.7 1.1-1.1z";
-
-  var probe = document.createElement("audio");
-  probe.volume = 0.5;
-  var canSetVolume = Math.abs(probe.volume - 0.5) < 0.01;
-
-  if (!canSetVolume) {
-    volumeWrap.hidden = true;
-    document.getElementById("controls").classList.add("no-volume");
-  } else {
-    var saved = null;
-    try { saved = localStorage.getItem("as-volume"); } catch (e) {}
-    if (saved !== null && !isNaN(parseFloat(saved))) volume.value = saved;
-    audio.volume = parseFloat(volume.value);
-    var paintFill = function () {
-      var v = audio.muted ? 0 : parseFloat(volume.value);
-      volume.style.setProperty("--fill", (v * 100) + "%");
-    };
-    paintFill();
-    var updateMuteIcon = function () {
-      var off = audio.muted || audio.volume === 0;
-      muteIcon.setAttribute("d", off ? ICON_OFF : ICON_ON);
-      muteBtn.setAttribute("aria-label", off ? "Activar sonido / Unmute" : "Silenciar / Mute");
-      paintFill();
-    };
-    volume.addEventListener("input", function () {
-      audio.volume = parseFloat(volume.value);
-      audio.muted = false;
-      try { localStorage.setItem("as-volume", volume.value); } catch (e) {}
-      updateMuteIcon();
-    });
-    muteBtn.addEventListener("click", function () { audio.muted = !audio.muted; updateMuteIcon(); });
-    updateMuteIcon();
-  }
-
   /* ---------- Share ---------- */
   var shareBtn = document.getElementById("share");
   var shareLabel = document.getElementById("shareLabel");
   var shareUrl = "https://alabanzastereo.com/";
   shareBtn.addEventListener("click", function () {
-    var data = { title: "Alabanza Stereo", text: "Escucha Alabanza Stereo en vivo / Listen live", url: shareUrl };
+    var data = { title: "Worship Stereo / Alabanza Stereo", text: "Listen live / Escucha en vivo", url: shareUrl };
     if (navigator.share) {
       navigator.share(data).catch(function () {});
     } else if (navigator.clipboard) {
       navigator.clipboard.writeText(shareUrl).then(function () {
-        shareLabel.textContent = "Enlace copiado";
-        setTimeout(function () { shareLabel.textContent = "Compartir"; }, 2200);
+        shareLabel.textContent = "Link copied";
+        setTimeout(function () { shareLabel.textContent = "Share"; }, 2200);
       });
     }
   });
